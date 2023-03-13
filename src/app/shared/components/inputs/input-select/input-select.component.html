@@ -1,0 +1,12 @@
+<div [formGroup]="formGroup">
+  <mat-form-field class="full-width">
+    <mat-select [placeholder]="title" [formControlName]="controlName">
+      <mat-option *ngFor="let option of options" [value]="option">{{
+        option
+      }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="checkInputService.hasErrorValidar(formControl, 'required')"
+      >Campo Obrigatório</mat-error
+    >
+  </mat-form-field>
+</div>

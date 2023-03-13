@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'user-register-fullstack-frontend';
+  @ViewChild('sidenav', { static: false })
+  sidenav!: MatSidenav;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  openSideNav() {
+    this.sidenav.open();
+  }
+
+  closeSideNav() {
+    this.sidenav.close();
+  }
 }
