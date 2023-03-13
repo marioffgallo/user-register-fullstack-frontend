@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Detalhes do Log
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <mat-list>
+        <mat-list-item>ID: {{ details.ID }}</mat-list-item>
+        <mat-list-item>Tipo: {{ typeToString(details.type) }}</mat-list-item>
+        <mat-list-item>Data do log: {{ dateToShow }}</mat-list-item>
+        <mat-list-item>Payload: Não implementado</mat-list-item>
+      </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      cdkFocusInitial
+      [mat-dialog-close]="true"
+    >
+      Fechar
+    </button>
+  </mat-card-actions>
+</mat-card>

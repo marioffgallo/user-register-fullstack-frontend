@@ -49,15 +49,6 @@ export class AllUsersTableComponent
 
   buildDatasource() {}
 
-  filter(idCourse: string) {
-    if (this.dataSource.filter == idCourse) {
-      this.dataSource.filter = '';
-    } else {
-      this.dataSource.filter = '';
-      this.dataSource.filter = idCourse;
-    }
-  }
-
   openDetails(user: User) {
     this.dialog.open(PopUpDetailsComponent, {
       data: user,
