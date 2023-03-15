@@ -34,9 +34,7 @@ export class PopUpUserEditComponent {
 
     const user = this.editUserForm.getRawValue() as User;
 
-    console.log('Usuario para salvar: ', user);
-
-    //this.save(user);
+    this.save(user);
   }
 
   private save(user: User) {
@@ -53,13 +51,7 @@ export class PopUpUserEditComponent {
         const dialogRef = this.dialog.open(AlertComponent, config);
 
         dialogRef.afterClosed().subscribe((opcao: boolean) => {
-          this.dialogRef.close();
-
-          if (opcao) {
-            
-          } else {
-            
-          }
+          this.dialogRef.close(opcao);
         });
       },
       (error) => {
@@ -82,6 +74,7 @@ export class PopUpUserEditComponent {
 
   private buildForm(user: User): void {
     this.editUserForm = new FormGroup({
+      id: new FormControl(user.id),
       name: new FormControl(
         user.name,
         [
@@ -90,7 +83,7 @@ export class PopUpUserEditComponent {
           Validators.maxLength(256),
         ],
       ),
-      age: new FormControl(user.age, [Validators.required, Validators.min(18), Validators.max(99)]),
+      age: new FormControl(user.age, [Validators.required, Validators.min(1), Validators.max(99)]),
       email: new FormControl(
         user.email,
         [

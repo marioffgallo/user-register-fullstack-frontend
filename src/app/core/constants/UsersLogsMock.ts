@@ -2,15 +2,15 @@ import { Log } from "../models/log.model";
 
 export const UsersLogsMock: Log[] = [
   {
-    ID: 1,
-    type: 0,
+    id: 1,
+    type: "GET",
     date: new Date(),
-    payload: {}, 
+    payload: "Busca no banco de dados", 
   },
   {
-    ID: 2,
-    type: 3,
+    id: 2,
+    type: "POST",
     date: new Date(),
-    payload: {}, 
+    payload: "Criado um usuário", 
   },
 ]

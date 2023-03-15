@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { MaterialModule } from "../constants/Material.module";
+import { LogsService } from "./logs.service";
 import { UserService } from "./user.service";
 
 @NgModule({
@@ -12,6 +13,7 @@ import { UserService } from "./user.service";
     exports: [],
     providers: [
         UserService,
+        LogsService
     ]
 })
 

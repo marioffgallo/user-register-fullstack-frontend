@@ -2,14 +2,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { User } from '../models/user.model';
+import { Log } from '../models/log.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class LogsService {
 
-  private baseUrl = 'http://localhost:9191/api/database';
+  private baseUrl = 'http://localhost:9192/api/database';
 
   constructor(private http: HttpClient) { }
 
@@ -17,40 +17,24 @@ export class UserService {
    * Do a posting 
    * @param user
    */
-  createUser(user: User): Observable<User> {
-      return this.http.post<User>(`${this.baseUrl}` + `/create`, user)
+  createLog(log: Log): Observable<Log> {
+      return this.http.post<Log>(`${this.baseUrl}` + `/logs/create`, log)
                   .pipe(
                     retry(3),
                     catchError(this.handleError)
                   );
   }
 
-  updateUser(user: User): Observable<User> {
-      return this.http.put<User> (`${this.baseUrl}` + `/update/` + user.id, user)
-        .pipe(
-            retry(3),
-            catchError(this.handleError)
-          );
-  }
-
-  deleteUser(id: number): Observable<User> {
-      return this.http.delete<User>(`${this.baseUrl}` + `/delete/` + id)
-            .pipe(
-              retry(3),
-              catchError(this.handleError)  
-            );
-  }
-
-  retrieveAllUsers(): Observable<User[]> {
-      return this.http.get<User[]>(`${this.baseUrl}` + `/users`)
+  retrieveAllLogs(): Observable<Log[]> {
+      return this.http.get<Log[]>(`${this.baseUrl}` + `/logs`)
                     .pipe(
                       retry(3),
                       catchError(this.handleError)
                     );
   }
 
-  retrieveUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}` + `/users/` + id)
+  retrieveLog(id: number): Observable<Log> {
+    return this.http.get<Log>(`${this.baseUrl}` + `/logs/` + id)
                   .pipe(
                     retry(3),
                     catchError(this.handleError)

@@ -19,19 +19,4 @@ export class PopUpLogDetailsComponent {
     this.details = data;
     this.dateToShow = convertDateHoursToShow(data.date);
   }
-
-  typeToString(value: number) {
-    switch(value) {
-      case 0:
-        return 'GET';
-      case 1:
-        return 'POST';
-      case 2:
-        return 'PUT';
-      case 3:
-        return 'DELETE';
-      default:
-        return 'ERROR';
-    }
-  }
 }

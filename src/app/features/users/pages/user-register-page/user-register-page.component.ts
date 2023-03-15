@@ -40,9 +40,7 @@ export class UserRegisterComponent implements OnInit {
 
     const user = this.register.getRawValue() as User;
 
-    console.log('Usuario para salvar: ', user);
-
-    //this.save(user);
+    this.save(user);
   }
 
   private save(user: User) {
@@ -97,7 +95,7 @@ export class UserRegisterComponent implements OnInit {
           Validators.maxLength(256),
         ],
       ),
-      age: new FormControl(user.age, [Validators.required, Validators.min(18), Validators.max(99)]),
+      age: new FormControl(user.age, [Validators.required, Validators.min(1), Validators.max(99)]),
       email: new FormControl(
         user.email,
         [
