@@ -27,3 +27,14 @@
   width: 400px;
   border: 1px solid black;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+
+  .button {
+    background-color: #f37924;
+    color: #fff;
+  }
+}

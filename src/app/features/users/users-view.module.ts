@@ -9,13 +9,13 @@ import { ServicesModule } from "src/app/core/services/services.module";
 import { InputsModule } from "src/app/shared/components/inputs/inputs.module";
 import { AllUsersLogsTableModule } from "./components/all-users-logs-table/all-users-logs-table.module";
 import { PopUpLogDetailsModule } from "./components/pop-up-log-details/pop-up-log-details.module";
-import { UserRegisterComponent } from "./pages/user-register-page/user-register-page.component";
-import { UserLogsComponent } from "./pages/users-logs-page/users-logs-page.component";
+import { UserRegisterPage } from "./pages/user-register-page/user-register-page.component";
+import { UserLogsPage } from "./pages/users-logs-page/users-logs-page.component";
 
 @NgModule({
     declarations: [
-        UserRegisterComponent,
-        UserLogsComponent
+        UserLogsPage,
+        UserRegisterPage
     ],
     imports: [
         BrowserModule,
@@ -31,8 +31,8 @@ import { UserLogsComponent } from "./pages/users-logs-page/users-logs-page.compo
         PopUpLogDetailsModule,
     ],
     exports: [
-        UserRegisterComponent,
-        UserLogsComponent
+        UserRegisterPage,
+        UserLogsPage
     ],
     providers: [
     ],

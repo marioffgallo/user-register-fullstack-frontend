@@ -5,7 +5,7 @@
   <mat-sidenav #sidenav class="sidenav" fixedInViewport="true">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list (click)="closeSideNav()">
-      <a mat-list-item [routerLink]="['/dashboard']">Página inicial</a>
+      <a mat-list-item [routerLink]="['/dashboard']">Dashboard</a>
       <mat-divider></mat-divider>
       <a mat-list-item [routerLink]="['/register/user']">Cadastrar Usuário</a>
       <mat-divider></mat-divider>
@@ -33,9 +33,7 @@
     </mat-toolbar>
 
     <div class="app-content">
-
       <router-outlet></router-outlet>
-      
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
@@ -43,12 +41,8 @@
 <copyright></copyright>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>account_circle</mat-icon>
-    <span>Conta</span>
-  </button>
-  <button mat-menu-item>
+  <button mat-menu-item [routerLink]="['/about']">
     <mat-icon>settings</mat-icon>
-    <span>Configurações</span>
+    <span>Sobre</span>
   </button>
 </mat-menu>

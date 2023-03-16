@@ -44,6 +44,10 @@ export class AllUsersLogsTableComponent implements AfterViewInit, OnInit {
     });
   }
 
+  refresh() {
+    this.buildDatasource();
+  }
+
   sortAllLogs(sort: Sort) {
     const data = this.dataSource.data.slice();
     if (!sort.active || sort.direction === '') {

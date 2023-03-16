@@ -76,6 +76,10 @@ export class AllUsersTableComponent
 
   }
 
+  refresh() {
+    this.buildDatasource();
+  }
+
   deleteUser(user: User) {
     const config = {
       data: {

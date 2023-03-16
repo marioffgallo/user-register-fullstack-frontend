@@ -12,7 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './user-register-page.component.html',
   styleUrls: ['./user-register-page.component.scss'],
 })
-export class UserRegisterComponent implements OnInit {
+export class UserRegisterPage implements OnInit {
   register!: FormGroup;
 
   constructor(

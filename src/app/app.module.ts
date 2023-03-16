@@ -12,6 +12,7 @@ import { DashboardViewModule } from './features/dashboard/dashboard-view.module'
 import { UsersViewModule } from './features/users/users-view.module';
 import { InputsModule } from './shared/components/inputs/inputs.module';
 import { ServicesModule } from './core/services/services.module';
+import { AboutViewModule } from './features/about/about-view.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -31,6 +32,7 @@ import { ServicesModule } from './core/services/services.module';
     //Features Pages
     DashboardViewModule,
     UsersViewModule,
+    AboutViewModule,
 
     //Shared
     InputsModule,
