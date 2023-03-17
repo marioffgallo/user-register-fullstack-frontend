@@ -10,3 +10,11 @@ docker build -t user-register-fullstack-frontend .
 Depois integrar o container no network do MySQL e utilizar a porta 4200:80 para executar o container. O comando abaixo executa tudo isso de uma vez:
 
 docker run --network springboot-mysql-net --name user-register-frontend -p 4200:80 user-register-fullstack-frontend
+
+# Repositorios
+
+Frontend -> https://github.com/marioffgallo/user-register-fullstack-frontend
+
+Backend -> https://github.com/marioffgallo/user-register-fullstack-backend
+
+Backend-log -> https://github.com/marioffgallo/user-register-fullstack-backend-log
