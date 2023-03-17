@@ -8,13 +8,15 @@ import { RouterModule } from '@angular/router';
 // Material
 import { MaterialModule } from 'src/app/core/constants/Material.module';
 
-//Footer
+// Footer
 import { CopyrightComponent } from './copyright/copyright.component';
 
 // Currency
 import ptBr from '@angular/common/locales/pt';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
+
+// Generic Alert
 import { AlertComponent } from './alert/alert.component';
 
 registerLocaleData(ptBr);

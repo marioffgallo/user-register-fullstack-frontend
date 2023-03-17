@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,35 +12,15 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './user-register-page.component.html',
   styleUrls: ['./user-register-page.component.scss'],
 })
-export class UserRegisterPage implements OnInit {
-  register!: FormGroup;
+export class UserRegisterPage {
+  public register!: FormGroup;
 
   constructor(
-    public dialog: MatDialog,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.createForm(this.createBlankForm());
-  }
-
-  ngOnInit(): void {
-    
-  }
-
-  public onCancel() {
-    this.register.reset();
-  }
-
-  public onSubmit() {
-    this.register.markAllAsTouched();
-
-    if (this.register.invalid) {
-      return;
-    }
-
-    const user = this.register.getRawValue() as User;
-
-    this.save(user);
   }
 
   private save(user: User) {
@@ -87,24 +67,22 @@ export class UserRegisterPage implements OnInit {
 
   private createForm(user: User): void {
     this.register = new FormGroup({
-      name: new FormControl(
-        user.name,
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(256),
-        ],
-      ),
-      age: new FormControl(user.age, [Validators.required, Validators.min(1), Validators.max(99)]),
-      email: new FormControl(
-        user.email,
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(2),
-          Validators.maxLength(256),
-        ],
-      ),
+      name: new FormControl(user.name, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(256),
+      ]),
+      age: new FormControl(user.age, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(99),
+      ]),
+      email: new FormControl(user.email, [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(2),
+        Validators.maxLength(256),
+      ]),
       birthDate: new FormControl(user.birthDate, [Validators.required]),
     });
   }
@@ -116,5 +94,21 @@ export class UserRegisterPage implements OnInit {
       email: null,
       birthDate: null,
     } as User;
+  }
+
+  public onCancel() {
+    this.register.reset();
+  }
+
+  public onSubmit() {
+    this.register.markAllAsTouched();
+
+    if (this.register.invalid) {
+      return;
+    }
+
+    const user = this.register.getRawValue() as User;
+
+    this.save(user);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/core/models/user.model';
 import { convertDateToShow } from 'src/app/core/utils/utils';
@@ -9,8 +9,8 @@ import { convertDateToShow } from 'src/app/core/utils/utils';
   styleUrls: ['./pop-up-details.component.scss'],
 })
 export class PopUpDetailsComponent {
-  details: User;
-  dateToShow: string;
+  public details: User;
+  public dateToShow: string;
 
   constructor(
     public dialogRef: MatDialogRef<PopUpDetailsComponent>,

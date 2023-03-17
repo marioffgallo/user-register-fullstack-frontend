@@ -5,7 +5,8 @@
         option
       }}</mat-option>
     </mat-select>
-    <mat-error *ngIf="checkInputService.hasErrorValidar(formControl, 'required')"
+    <mat-error
+      *ngIf="checkInputService.hasErrorValidar(formControl, 'required')"
       >Campo Obrigatório</mat-error
     >
   </mat-form-field>

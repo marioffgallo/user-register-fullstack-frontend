@@ -5,17 +5,16 @@ import { CheckInputsService } from '../service/check-inputs.service';
 @Component({
   selector: 'app-input-date',
   templateUrl: './input-date.component.html',
-  styleUrls: ['./input-date.component.scss']
+  styleUrls: ['./input-date.component.scss'],
 })
 export class InputDateComponent {
-
   @Input() title!: string;
   @Input() formGroup!: FormGroup;
   @Input() controlName!: string;
 
-  minDate = new Date();
+  public minDate = new Date();
 
-  constructor(public checkInputService: CheckInputsService) { }
+  constructor(public checkInputService: CheckInputsService) {}
 
   get formControl(): AbstractControl {
     return this.formGroup.controls[this.controlName];

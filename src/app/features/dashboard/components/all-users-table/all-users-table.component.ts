@@ -1,18 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { AlertComponent } from 'src/app/core/components/alert/alert.component';
-import { UsersListMock } from 'src/app/core/constants/UsersListMock';
 import { Alert } from 'src/app/core/models/alert.model';
 import { User } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -25,13 +17,14 @@ import { PopUpUserEditComponent } from '../pop-up-user-edit/pop-up-user-edit.com
   templateUrl: './all-users-table.component.html',
   styleUrls: ['./all-users-table.component.scss'],
 })
-export class AllUsersTableComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class AllUsersTableComponent implements OnInit, AfterViewInit {
   tooltipPosition: TooltipPosition;
   tooltipDuration: number;
+
   displayedColumns: string[] = ['id', 'name', 'age', 'acoes'];
   dataSource = new MatTableDataSource<User>([]);
+
+  searchText: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,10 +34,14 @@ export class AllUsersTableComponent
     this.tooltipPosition = 'right';
   }
 
-  ngOnDestroy() {}
-
   ngOnInit(): void {
     this.buildDatasource();
+
+    this.dataSource.filterPredicate = (data: User, filter: string) => {
+      return data.id!.toString().toLowerCase().includes(filter)
+        ? data.id!.toString().toLowerCase() === filter
+        : data.name!.toString().toLowerCase().includes(filter);
+    };
   }
 
   ngAfterViewInit(): void {
@@ -52,35 +49,36 @@ export class AllUsersTableComponent
     this.dataSource.sort = this.sort;
   }
 
-  buildDatasource() {
-    this.userSvc.retrieveAllUsers()
-    .subscribe((users) => this.dataSource.data = users);
+  private buildDatasource() {
+    this.userSvc
+      .retrieveAllUsers()
+      .subscribe((users) => (this.dataSource.data = users));
   }
 
-  openDetails(user: User) {
+  public openDetails(user: User) {
     this.dialog.open(PopUpDetailsComponent, {
       data: user,
     });
   }
 
-  editUser(user: User) {
-    this.dialog.open(PopUpUserEditComponent, {
-      data: user,
-    }).afterClosed()
-    .subscribe((saved) => {
-      if(saved){
-        this.buildDatasource();
-      }
-    });
-
-
+  public editUser(user: User) {
+    this.dialog
+      .open(PopUpUserEditComponent, {
+        data: user,
+      })
+      .afterClosed()
+      .subscribe((saved) => {
+        if (saved) {
+          this.buildDatasource();
+        }
+      });
   }
 
-  refresh() {
+  public refresh() {
     this.buildDatasource();
   }
 
-  deleteUser(user: User) {
+  public deleteUser(user: User) {
     const config = {
       data: {
         title: 'Atenção!',
@@ -106,16 +104,16 @@ export class AllUsersTableComponent
               corBtnSuccess: 'primary',
             } as Alert,
           };
-      
+
           this.dialog.open(AlertComponent, config);
-          
+
           this.buildDatasource();
-        })
+        });
       }
     });
   }
 
-  sortAllUsers(sort: Sort) {
+  public sortAllUsers(sort: Sort) {
     const data = this.dataSource.data.slice();
     if (!sort.active || sort.direction === '') {
       this.dataSource.data = data;
@@ -135,5 +133,14 @@ export class AllUsersTableComponent
           return 0;
       }
     });
+  }
+
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

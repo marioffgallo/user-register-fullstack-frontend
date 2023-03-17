@@ -33,7 +33,8 @@
             matInput
             [matDatepicker]="picker"
             formControlName="birthDate"
-            readonly
+            onkeydown="return false"
+            (focus)="picker.open()"
           />
           <mat-datepicker-toggle
             matSuffix

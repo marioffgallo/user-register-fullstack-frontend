@@ -15,8 +15,8 @@ import { PopUpLogDetailsComponent } from '../pop-up-log-details/pop-up-log-detai
   styleUrls: ['./all-users-logs-table.component.scss'],
 })
 export class AllUsersLogsTableComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['id', 'type', 'date', 'acoes'];
-  dataSource = new MatTableDataSource<Log>([]);
+  public displayedColumns: string[] = ['id', 'action', 'date', 'acoes'];
+  public dataSource = new MatTableDataSource<Log>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -25,6 +25,12 @@ export class AllUsersLogsTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.buildDatasource();
+
+    this.dataSource.filterPredicate = (data: Log, filter: string) => {
+      return data.id!.toString().toLowerCase().includes(filter)
+        ? data.id!.toString().toLowerCase() === filter
+        : data.action!.toString().toLowerCase().includes(filter);
+    };
   }
 
   ngAfterViewInit() {
@@ -32,23 +38,23 @@ export class AllUsersLogsTableComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  buildDatasource() {
+  private buildDatasource() {
     this.logSvc.retrieveAllLogs().subscribe((logs) => {
       this.dataSource.data = logs;
     });
   }
 
-  openDetails(log: Log) {
+  public openDetails(log: Log) {
     this.dialog.open(PopUpLogDetailsComponent, {
       data: log,
     });
   }
 
-  refresh() {
+  public refresh() {
     this.buildDatasource();
   }
 
-  sortAllLogs(sort: Sort) {
+  public sortAllLogs(sort: Sort) {
     const data = this.dataSource.data.slice();
     if (!sort.active || sort.direction === '') {
       this.dataSource.data = data;
@@ -70,7 +76,16 @@ export class AllUsersLogsTableComponent implements AfterViewInit, OnInit {
     });
   }
 
-  convertDate(date: Date) {
+  public convertDate(date: Date) {
     return convertDateToShow(date);
+  }
+
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

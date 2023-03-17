@@ -1,3 +1,12 @@
+interface dateBreakedDown {
+  ano: number;
+  dia: number;
+  mes: number;
+  hh: number;
+  min: number;
+  seg: number;
+}
+
 function getDateSomehow(date?: Date | number | null): Date {
   if (!date) return new Date();
 
@@ -8,15 +17,6 @@ function getDateSomehow(date?: Date | number | null): Date {
     dateToReturn = new Date(date);
   }
   return dateToReturn;
-}
-
-interface dateBreakedDown {
-  ano: number;
-  dia: number;
-  mes: number;
-  hh: number;
-  min: number;
-  seg: number;
 }
 
 function breakDateIntoValues(date: Date): dateBreakedDown {

@@ -3,11 +3,7 @@
     <mat-card-title> Editar Usuário </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form
-      autocomplete="off"
-      novalidate
-      [formGroup]="editUserForm"
-    >
+    <form autocomplete="off" novalidate [formGroup]="editUserForm">
       <mat-card-content>
         <app-input-text
           title="Nome Completo*"
@@ -41,7 +37,8 @@
           ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
 
-          <mat-error *ngIf="editUserForm.controls.birthDate.hasError('required')"
+          <mat-error
+            *ngIf="editUserForm.controls.birthDate.hasError('required')"
             >Campo Obrigatório</mat-error
           >
         </mat-form-field>
