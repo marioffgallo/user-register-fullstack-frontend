@@ -16,6 +16,29 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   /**
+   * Retrieve all users from API
+   *
+   * @returns {User[]} Returns a list of users from the database
+   */
+  public retrieveAllUsers(): Observable<User[]> {
+    return this.http
+      .get<User[]>(`${this.baseUrl}` + `/users`)
+      .pipe(retry(3), catchError(this.handleError));
+  }
+
+  /**
+   * Send a id to retrieve a user in the API
+   *
+   * @param {number} id the id of the user
+   * @returns {User} Returns the user retrieved from database
+   */
+  public retrieveUser(id: number): Observable<User> {
+    return this.http
+      .get<User>(`${this.baseUrl}` + `/users/` + id)
+      .pipe(retry(3), catchError(this.handleError));
+  }
+
+  /**
    * Send a user to be created in the API
    *
    * @param {User} user the user object
@@ -48,29 +71,6 @@ export class UserService {
   public deleteUser(id: number): Observable<any> {
     return this.http
       .delete<User>(`${this.baseUrl}` + `/delete/` + id)
-      .pipe(retry(3), catchError(this.handleError));
-  }
-
-  /**
-   * Retrieve all users from API
-   *
-   * @returns {User[]} Returns a list of users from the database
-   */
-  public retrieveAllUsers(): Observable<User[]> {
-    return this.http
-      .get<User[]>(`${this.baseUrl}` + `/users`)
-      .pipe(retry(3), catchError(this.handleError));
-  }
-
-  /**
-   * Send a id to retrieve a user in the API
-   *
-   * @param {number} id the id of the user
-   * @returns {User} Returns the user retrieved from database
-   */
-  public retrieveUser(id: number): Observable<User> {
-    return this.http
-      .get<User>(`${this.baseUrl}` + `/users/` + id)
       .pipe(retry(3), catchError(this.handleError));
   }
 

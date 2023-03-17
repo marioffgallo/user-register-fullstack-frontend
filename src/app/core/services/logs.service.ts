@@ -16,18 +16,6 @@ export class LogsService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Send a log to be created in the API
-   *
-   * @param {Log} log the log object
-   * @returns {Log} Returns a log created on database with ID
-   */
-  public createLog(log: Log): Observable<Log> {
-    return this.http
-      .post<Log>(`${this.baseUrl}` + `/logs/create`, log)
-      .pipe(retry(3), catchError(this.handleError));
-  }
-
-  /**
    * Retrieve all logs from API
    *
    * @returns {Log[]} Returns a list of logs from the database
@@ -47,6 +35,18 @@ export class LogsService {
   public retrieveLog(id: number): Observable<Log> {
     return this.http
       .get<Log>(`${this.baseUrl}` + `/logs/` + id)
+      .pipe(retry(3), catchError(this.handleError));
+  }
+
+  /**
+   * Send a log to be created in the API
+   *
+   * @param {Log} log the log object
+   * @returns {Log} Returns a log created on database with ID
+   */
+  public createLog(log: Log): Observable<Log> {
+    return this.http
+      .post<Log>(`${this.baseUrl}` + `/logs/create`, log)
       .pipe(retry(3), catchError(this.handleError));
   }
 
